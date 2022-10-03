@@ -2,14 +2,15 @@ import 'package:bytebank_final/database/dao/contact_dao.dart';
 import 'package:bytebank_final/models/contact.dart';
 import 'package:bytebank_final/screens/contact_form.dart';
 import 'package:flutter/material.dart';
+
 class ContactList extends StatelessWidget {
-final ContactDao _dao = ContactDao();
+  final ContactDao _dao = ContactDao();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Contacts'),
+          title: Text('Transfer'),
         ),
         body: FutureBuilder<List<Contact>>(
           initialData: [],
