@@ -1,4 +1,5 @@
 import 'package:bytebank_final/screens/contact_list.dart';
+import 'package:bytebank_final/screens/transactions_list.dart';
 import 'package:flutter/material.dart';
 
 class Dashboard extends StatelessWidget {
@@ -21,26 +22,39 @@ class Dashboard extends StatelessWidget {
             ),
             Row(
               children: [
-                _FeatureItem(
-                  'Transfer',
-                  Icons.monetization_on,
-                ),
+                _FeatureItem('Transfer', Icons.monetization_on, () {
+                  _showContactsList(context);
+                }),
                 _FeatureItem(
                   'Transaction Feed',
                   Icons.description,
+                  () {
+                    _showTransactionsList(context);
+                  },
                 ),
               ],
             ),
           ]),
     );
   }
+
+  void _showContactsList(BuildContext context) {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => ContactList()));
+  }
+
+  void _showTransactionsList(BuildContext context) {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => TransactionsList()));
+  }
 }
 
 class _FeatureItem extends StatelessWidget {
   final String name;
   final IconData icon;
+  final Function onClick;
 
-  _FeatureItem(this.name, this.icon);
+  _FeatureItem(this.name, this.icon, this.onClick);
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -49,11 +63,7 @@ class _FeatureItem extends StatelessWidget {
         color: Theme.of(context).primaryColor,
         child: InkWell(
           onTap: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: ((context) => ContactList()),
-              ),
-            );
+            onClick();
           },
           child: Container(
             padding: EdgeInsets.all(8),

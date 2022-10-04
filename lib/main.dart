@@ -1,9 +1,12 @@
+import 'package:bytebank_final/http/weblient.dart';
 import 'package:bytebank_final/screens/dashboard.dart';
 import 'package:flutter/material.dart';
 
-
 void main() {
   runApp(const MyApp());
+  findAll().then(
+    (transactions) => print('New transactions ${transactions}'),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -15,15 +18,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSwatch(
-          primarySwatch: Colors.green
-        ).copyWith(
-          secondary: Colors.green[900]
-        ),
-        buttonTheme: ButtonThemeData(
-          buttonColor: Colors.green[900]
-        )
-      ),
+          colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.green)
+              .copyWith(secondary: Colors.green[900]),
+          buttonTheme: ButtonThemeData(buttonColor: Colors.green[900])),
       home: Dashboard(),
     );
   }

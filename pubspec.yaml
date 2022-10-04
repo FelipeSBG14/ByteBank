@@ -40,6 +40,8 @@ dev_dependencies:
     sdk: flutter
   sqflite:
   path:
+  http: ^0.13.5
+  http_interceptor: ^1.0.2
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
