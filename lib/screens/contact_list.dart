@@ -2,6 +2,7 @@ import 'package:bytebank_final/components/progress.dart';
 import 'package:bytebank_final/database/dao/contact_dao.dart';
 import 'package:bytebank_final/models/contact.dart';
 import 'package:bytebank_final/screens/contact_form.dart';
+import 'package:bytebank_final/screens/transaction_form.dart';
 import 'package:flutter/material.dart';
 
 class ContactList extends StatelessWidget {
@@ -22,7 +23,6 @@ class ContactList extends StatelessWidget {
                 break;
               case ConnectionState.waiting:
                 return Progress('Loading');
-                break;
               case ConnectionState.active:
                 break;
               case ConnectionState.done:
@@ -30,7 +30,14 @@ class ContactList extends StatelessWidget {
                 return ListView.builder(
                   itemBuilder: (context, index) {
                     final Contact contact = contacts[index];
-                    return _ContactItem(contact);
+                    return _ContactItem(contact, () {
+                      print('cliquei');
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => TransactionForm(contact),
+                        ),
+                      );
+                    });
                   },
                   itemCount: contacts.length,
                 );
@@ -54,12 +61,16 @@ class ContactList extends StatelessWidget {
 
 class _ContactItem extends StatelessWidget {
   final Contact contact;
-  _ContactItem(this.contact);
+  final Function onClick;
+  _ContactItem(this.contact, this.onClick);
 
   @override
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
+        onTap: () {
+          onClick();
+        },
         title: Text(
           contact.name,
           style: TextStyle(

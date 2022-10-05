@@ -1,12 +1,14 @@
 import 'package:bytebank_final/http/weblient.dart';
+import 'package:bytebank_final/models/contact.dart';
 import 'package:bytebank_final/screens/dashboard.dart';
+import 'package:bytebank_final/screens/transactions_list.dart';
 import 'package:flutter/material.dart';
 
 void main() {
   runApp(const MyApp());
-  findAll().then(
+/*   findAll().then(
     (transactions) => print('New transactions ${transactions}'),
-  );
+  ); */
 }
 
 class MyApp extends StatelessWidget {
